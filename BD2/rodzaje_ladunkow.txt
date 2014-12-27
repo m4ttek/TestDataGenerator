@@ -1,0 +1,3 @@
+pierwszy_rodzaj
+drugi_rodzaj
+trzeci_rodzaj
