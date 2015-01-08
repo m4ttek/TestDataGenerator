@@ -1,28 +1,30 @@
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Implementacja domyœlnej tabeli generuj¹cej odpowiednie dla niej dane.
- * 
- * @author Mateusz Kamiñski
+ * Implementacja domyï¿½lnej tabeli generujï¿½cej odpowiednie dla niej dane.
+ *
+ * @author Mateusz Kamiï¿½ski
  */
 public class DefaultTable implements Table {
-	
+
 	private final String tableName;
 
 	List<Column> columnList;
-	
+
 	private int numberOfRowsToGenerate;
 
 	public DefaultTable(String tableName, int numberOfRowsToGenerate) {
 		this.tableName = tableName;
 		this.numberOfRowsToGenerate = numberOfRowsToGenerate;
 	}
-	
+
 	@Override
 	public String getTableName() {
 		return tableName;
 	}
-	
+
 	@Override
 	public void setColumns(List<Column> columnList) {
 		this.columnList = columnList;
@@ -51,11 +53,15 @@ public class DefaultTable implements Table {
 	@Override
 	public String generateDataForTable() {
 		String columnNames = prepareColumnNames();
-		
+
 		StringBuilder sb = new StringBuilder("\n-- Generated data for table: ");
 		sb.append(tableName)
 		  .append("\n\n");
-		
+		Map<String, List<String>> collectedData = new HashMap<String, List<String>>();
+		for (Column column : columnList) {
+			collectedData.put(column.getColumnName(), column.generateDataForColumn());
+		}
+
 		for (int rowNumber = 0; rowNumber < numberOfRowsToGenerate; rowNumber++) {
 			sb.append("INSERT INTO ")
 			  .append(tableName)
@@ -63,9 +69,17 @@ public class DefaultTable implements Table {
 			  .append(columnNames)
 			  .append(" VALUES (");
 			for (Column column : columnList) {
-				sb.append(column.generateDataUnit())
-				  .append(", ");
+				List<String> list = collectedData.get(column.getColumnName());
+				String data = list.get(rowNumber);
+				if (data.isEmpty()) {
+					sb.append("null");
+				} else {
+					sb.append(data);
+				}
+				sb.append(", ");
+				System.out.println(column.getColumnName());
 			}
+			System.out.println(sb.toString());
 			sb.delete(sb.length() - 2, sb.length());
 			sb.append(" );\n");
 		}

@@ -1,0 +1,4 @@
+audytorium
+aula
+sala cwiczeniowa
+laboratorium

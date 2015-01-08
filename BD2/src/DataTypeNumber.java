@@ -1,26 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
- * 
- * @author Mateusz Kamiñski
+ *
+ * @author Mateusz Kamiï¿½ski
  */
 public class DataTypeNumber implements DataType {
 
-	private int min;
-	
-	private int max;
-	
-	private boolean mustBeUnique;
-	
-	private boolean isNullable;
-	
-	private int decimalPoint;
-	
-	private boolean isSequential;
-	
-	private int midPoint;
+	private long min;
 
-	private int seq;
-	
-	public DataTypeNumber(int min, int max, int midPoint, int decimalPoint, boolean mustBeUnique, boolean isNullable, boolean isSequential ) {
+	private long max;
+
+	private boolean mustBeUnique;
+
+	private boolean isNullable;
+
+	private int decimalPoint;
+
+	private boolean isSequential;
+
+	private long midPoint;
+
+	private long seq;
+
+	private Random random = new Random();
+
+	public DataTypeNumber(long min, long max, long midPoint, int decimalPoint, boolean mustBeUnique, boolean isNullable, boolean isSequential ) {
 		this.midPoint = midPoint;
 		this.decimalPoint = decimalPoint;
 		this.mustBeUnique = mustBeUnique;
@@ -29,22 +35,41 @@ public class DataTypeNumber implements DataType {
 		if (min <= max) {
 			this.min = min;
 			this.max = max;
+			seq = min;
 		} else {
 			this.max = min;
 			this.min = max;
+			seq = max;
 		}
 	}
-	
+
 	@Override
-	public String getData() {
-		int chosenNumber = 0;
-		String data = null;
-		if (isSequential) {
-			chosenNumber = seq++;
-			data = String.valueOf(chosenNumber);
-		} else {
-			
+	public List<String> getData(int numberOfTuples) {
+		long chosenNumber = 0;
+		List<String> dataList = new ArrayList<String>();
+		for (int row = 0; row < numberOfTuples; row++) {
+			String data = "";
+			if (isSequential) {
+				chosenNumber = seq;
+				seq += ((max - min) / numberOfTuples);
+				data = String.valueOf(chosenNumber);
+			} else {
+				long nextLong = random.nextLong() % (max - min);
+				if (nextLong < 0) {
+					nextLong = -nextLong;
+				}
+				nextLong = nextLong + min;
+				StringBuilder builder = new StringBuilder(String.valueOf(nextLong));
+				if (decimalPoint > 0) {
+					builder.append('.');
+					for (int i = 0; i < decimalPoint; i++) {
+						builder.append(random.nextInt(10));
+					}
+				}
+				data = builder.toString();
+			}
+			dataList.add(data);
 		}
-		return data;
+		return dataList;
 	}
 }

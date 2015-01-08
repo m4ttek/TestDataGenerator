@@ -1,14 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
- * Domyœlna implementacja DataGeneratorManager.
- * 
- * @author Mateusz Kamiñski
+ * Domyï¿½lna implementacja DataGeneratorManager.
+ *
+ * @author Mateusz Kamiï¿½ski
  */
 public class DataGeneratorManagerImpl implements DataGeneratorManager {
-	
+
 	private List<Table> tableList;
-	
+
 	private List<String> generationTableList;
 
 	@Override
@@ -19,7 +24,26 @@ public class DataGeneratorManagerImpl implements DataGeneratorManager {
 				content.append(table.generateDataForTable());
 			}
 		}
-		System.out.println(content.toString());
+		File file = new File(fileName);
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(fileName, "UTF-8");
+			writer.println(content.toString());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (writer != null) {
+			writer.close();
+		}
 	}
 
 	@Override

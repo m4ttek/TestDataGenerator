@@ -1,8 +1,10 @@
+import java.util.List;
+
 /**
- * 
- * @author Mateusz Kamiñski
+ *
+ * @author Mateusz Kamiï¿½ski
  */
 public interface DataType {
-	
-	String getData();
+
+	List<String> getData(int numberOfTuples);
 }

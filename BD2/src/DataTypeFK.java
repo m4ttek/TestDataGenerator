@@ -4,29 +4,33 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 
- * @author Mateusz Kamiñski
+ *
+ * @author Mateusz Kamiï¿½ski
  */
 public class DataTypeFK implements DataType {
 
 	private Column thatWillHaveGeneratedData;
-	
+
 	private boolean mustBeUnique;
 
 	private List<String> generatedData;
 
 	private boolean isNullable;
-	
+
 	private Random rand = new Random(new Date().getTime());
-	
-	public DataTypeFK(Column thatWillHaveGeneratedData, boolean mustBeUnique, boolean isNullable) {
+
+	private boolean fromTheSameTable;
+
+	public DataTypeFK(Column thatWillHaveGeneratedData, boolean mustBeUnique, boolean isNullable, boolean fromTheSameTable) {
 		this.thatWillHaveGeneratedData = thatWillHaveGeneratedData;
 		this.mustBeUnique = mustBeUnique;
 		this.isNullable = isNullable;
+		this.fromTheSameTable = fromTheSameTable;
 	}
 
 	@Override
-	public String getData() {
+	public List<String> getData(int numberOfTuples) {
+		List<String> dataList = new ArrayList<String>();
 		if (generatedData == null) {
 			generatedData = new ArrayList<String>(thatWillHaveGeneratedData.getGeneratedData());
 			if (generatedData == null || generatedData.isEmpty()) {
@@ -35,18 +39,33 @@ public class DataTypeFK implements DataType {
 			}
 		}
 		int random = 0;
-		String data = null;
-		if (isNullable) {
-			random = rand.nextInt() % (generatedData.size() + 1);
-		} else {
-			random = rand.nextInt() % generatedData.size();
+		for (int row = 0; row < numberOfTuples; row++) {
+			String data = "";
+			int range = 0;
+			if (fromTheSameTable) {
+				range = row;
+			} else {
+				range = generatedData.size();
+			}
+			if (isNullable) {
+				range++;
+			}
+			if (range != 0) {
+				random = rand.nextInt(range);
+			}
+			if (random < generatedData.size()) {
+				data = generatedData.get(random);
+			}
+			if (mustBeUnique && data != null) {
+				generatedData.remove(random);
+			}
+
+			if (fromTheSameTable && row == random) {
+				dataList.add("null");
+			} else {
+				dataList.add(data);
+			}
 		}
-		if (random < generatedData.size()) {
-			data = generatedData.get(random);
-		}
-		if (mustBeUnique && data != null) {
-			generatedData.remove(random);
-		}
-		return data;
+		return dataList;
 	}
 }
