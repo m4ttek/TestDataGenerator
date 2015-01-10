@@ -1,0 +1,397 @@
+Bardo
+Bielawa
+Bierutów
+Bogatynia
+Boguszów-Gorce
+Bolesławiec
+Bolków
+Brzeg Dolny
+Bystrzyca Kłodzka
+Chocianów
+Chojnów
+Duszniki Zdrój
+Dzierżoniów
+Głogów
+Głuszyca
+Góra
+Gryfów Śląski
+Jawor
+Jaworzyna Śląska
+Jedlina Zdrój
+Jelcz-Laskowice
+Jelenia Góra
+Kamienna Góra
+Karpacz
+Kąty Wrocławskie
+Kłodzko
+Kowary
+Kudowa Zdrój
+Lądek Zdrój
+Legnica
+Leśna
+Lubań
+Lubawka
+Lubin
+Lubomierz
+Lwówek Śląski
+Mieroszów
+Międzybórz
+Międzylesie
+Milicz
+Mirsk
+Niemcza
+Nowa Ruda
+Nowogrodziec
+Oborniki Śląskie
+Oleśnica
+Oława
+Piechowice
+Pieńsk
+Pieszyce
+Piława Górna
+Polanica Zdrój
+Polkowice
+Prochowice
+Prusice
+Przemków
+Radków
+Siechnice
+Sobótka
+Stronie Śląskie
+Strzegom
+Strzelin
+Syców
+Szczawno Zdrój
+Szczytna
+Szklarska Poręba
+Ścinawa
+Środa Śląska
+Świdnica
+Świebodzice
+Świeradów Zdrój
+Świerzawa
+Trzebnica
+Twardogóra
+Wałbrzych
+Wąsosz
+Węgliniec
+Wiązów
+Wleń
+Wojcieszów
+Wołów
+Wrocław
+Zawidów
+Ząbkowice Śląskie
+Zgorzelec
+Ziębice
+Złotoryja
+Złoty Stok
+Żarów
+Żmigród
+Aleksandrów Kujawski
+Barcin
+Brodnica
+Brześć Kujawski
+Bydgoszcz
+Chełmno
+Chełmża
+Chodecz
+Ciechocinek
+Dobrzyń nad Wisłą
+Gniewkowo
+Golub-Dobrzyń
+Górzno
+Grudziądz
+Inowrocław
+Izbica Kujawska
+Jabłonowo Pomorskie
+Janikowo
+Janowiec Wielkopolski
+Kamień Krajeński
+Kcynia
+Koronowo
+Kowal
+Kowalewo Pomorskie
+Kruszwica
+Lipno
+Lubień Kujawski
+Lubraniec
+Łabiszyn
+Łasin
+Mogilno
+Mrocza
+Nakło nad Notecią
+Nieszawa
+Nowe
+Pakość
+Piotrków Kujawski
+Radziejów
+Radzyń Chełmiński
+Rypin
+Sępólno Krajeńskie
+Skępe
+Solec Kujawski
+Strzelno
+Szubin
+Świecie
+Toruń
+Tuchola
+Wąbrzeźno
+Więcbork
+Włocławek
+Żnin
+Barlinek
+Barwice
+Białogard
+Biały Bór
+Bobolice
+Borne Sulinowo
+Cedynia
+Chociwel
+Chojna
+Choszczno
+Czaplinek
+Człopa
+Darłowo
+Dębno
+Dobra
+Dobrzany
+Drawno
+Drawsko Pomorskie
+Golczewo
+Goleniów
+Gryfice
+Gryfino
+Ińsko
+Kalisz Pomorski
+Kamień Pomorski
+Karlino
+Kępice
+Kołobrzeg
+Koszalin
+Lipiany
+Łobez
+Maszewo
+Mieszkowice
+Międzyzdroje
+Mirosławiec
+Moryń
+Myślibórz
+Nowe Warpno
+Nowogard
+Pełczyce
+Płoty
+Polanów
+Police
+Połczyn Zdrój
+Pyrzyce
+Recz
+Resko
+Sianów
+Sławno
+Stargard Szczeciński
+Suchań
+Szczecin
+Szczecinek
+Świdwin
+Świnoujście
+Trzcińsko Zdrój
+Trzebiatów
+Tuczno
+Wałcz
+Węgorzyno
+Wolin
+Złocieniec
+Bojanowo
+Borek Wielkopolski
+Buk
+Chodzież
+Czarnków
+Czempiń
+Czerniejewo
+Dąbie
+Dobra
+Dolsk
+Gniezno
+Golina
+Gołańcz
+Gostyń
+Grabów nad Prosną
+Grodzisk Wielkopolski
+Jarocin
+Jastrowie
+Jutrosin
+Kalisz
+Kępno
+Kleczew
+Kłecko
+Kłodawa
+Kobylin
+Koło
+Konin
+Kostrzyn
+Kościan
+Koźmin Wielkopolski
+Kórnik
+Krajenka
+Krobia
+Krotoszyn
+Krzywiń
+Krzyż Wielkopolski
+Książ Wielkopolski
+Leszno
+Luboń
+Lwówek
+Łobżenica
+Margonin
+Miejska Górka
+Międzychód
+Mikstat
+Miłosław
+Mosina
+Murowana Goślina
+Nekla
+Nowe Skalmierzyce
+Nowy Tomyśl
+Oborniki
+Obrzycko
+Odolanów
+Okonek
+Opalenica
+Osieczna
+Ostroróg
+Ostrów Wielkopolski
+Ostrzeszów
+Piła
+Pleszew
+Pniewy
+Pobiedziska
+Pogorzela
+Poniec
+Poznań
+Przedecz
+Puszczykowo
+Pyzdry
+Rakoniewice
+Raszków
+Rawicz
+Rogoźno
+Rychwał
+Rydzyna
+Sieraków
+Skoki
+Słupca
+Sompolno
+Stawiszyn
+Stęszew
+Sulmierzyce
+Swarzędz
+Szamocin
+Szamotuły
+Ślesin
+Śmigiel
+Śrem
+Środa Wielkopolska
+Trzcianka
+Trzemeszno
+Tuliszków
+Turek
+Ujście
+Wągrowiec
+Wieleń
+Wielichowo
+Witkowo
+Wolsztyn
+Wronki
+Września
+Wyrzysk
+Wysoka
+Zagórów
+Zbąszyń
+Zduny
+Złotów
+Żerków
+Białobrzegi
+Bieżuń
+Błonie
+Brok
+Brwinów
+Chorzele
+Ciechanów
+Drobin
+Garwolin
+Gąbin
+Glinojeck
+Gostynin
+Góra Kalwaria
+Grodzisk Mazowiecki
+Grójec
+Iłża
+Józefów
+Kałuszyn
+Karczew
+Kobyłka
+Konstancin-Jeziorna
+Kosów Lacki
+Kozienice
+Legionowo
+Lipsko
+Łaskarzew
+Łochów
+Łomianki
+Łosice
+Maków Mazowiecki
+Marki
+Milanówek
+Mińsk Mazowiecki
+Mława
+Mogielnica
+Mordy
+Mszczonów
+Myszyniec
+Nasielsk
+Nowe Miasto nad Pilicą
+Nowy Dwór Mazowiecki
+Ostrołęka
+Ostrów Mazowiecka
+Otwock
+Ożarów Mazowiecki
+Piaseczno
+Piastów
+Pilawa
+Pionki
+Płock
+Płońsk
+Podkowa Leśna
+Pruszków
+Przasnysz
+Przysucha
+Pułtusk
+Raciąż
+Radom
+Radzymin
+Różan
+Serock
+Siedlce
+Sierpc
+Skaryszew
+Sochaczew
+Sokołów Podlaski
+Sulejówek
+Szydłowiec
+Tłuszcz
+Warka
+Warszawa
+Wesoła
+Węgrów
+Wołomin
+Wyszków
+Wyszogród
+Wyśmierzyce
+Zakroczym
+Ząbki
+Zielonka
+Zwoleń
+Żelechów
+Żuromin
+Żyrardów

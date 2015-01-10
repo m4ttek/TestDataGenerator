@@ -9,7 +9,9 @@ import java.util.Random;
  */
 public class DataTypeFK implements DataType {
 
-	private Column thatWillHaveGeneratedData;
+	private List<Column> thatWillHaveGeneratedData;
+
+	private Column columnWithGeneratedData;
 
 	private boolean mustBeUnique;
 
@@ -21,8 +23,15 @@ public class DataTypeFK implements DataType {
 
 	private boolean fromTheSameTable;
 
-	public DataTypeFK(Column thatWillHaveGeneratedData, boolean mustBeUnique, boolean isNullable, boolean fromTheSameTable) {
+	public DataTypeFK(List<Column> thatWillHaveGeneratedData, boolean mustBeUnique, boolean isNullable, boolean fromTheSameTable) {
 		this.thatWillHaveGeneratedData = thatWillHaveGeneratedData;
+		this.mustBeUnique = mustBeUnique;
+		this.isNullable = isNullable;
+		this.fromTheSameTable = fromTheSameTable;
+	}
+
+	public DataTypeFK(Column thatWillHaveGeneratedData, boolean mustBeUnique, boolean isNullable, boolean fromTheSameTable) {
+		columnWithGeneratedData = thatWillHaveGeneratedData;
 		this.mustBeUnique = mustBeUnique;
 		this.isNullable = isNullable;
 		this.fromTheSameTable = fromTheSameTable;
@@ -32,8 +41,19 @@ public class DataTypeFK implements DataType {
 	public List<String> getData(int numberOfTuples) {
 		List<String> dataList = new ArrayList<String>();
 		if (generatedData == null) {
-			generatedData = new ArrayList<String>(thatWillHaveGeneratedData.getGeneratedData());
-			if (generatedData == null || generatedData.isEmpty()) {
+			if (columnWithGeneratedData != null) {
+				generatedData = new ArrayList<String>(columnWithGeneratedData.getGeneratedData());
+			} else {
+				generatedData = new ArrayList<String>();
+			}
+			if (thatWillHaveGeneratedData != null) {
+				for (Column columnWithData : thatWillHaveGeneratedData) {
+					if (columnWithData.getGeneratedData() != null) {
+						generatedData.addAll(columnWithData.getGeneratedData());
+					}
+				}
+			}
+			if (generatedData.isEmpty()) {
 				throw new RuntimeException(
 						"DataTypeFK: generated data from another table is not available - check for possible improper order of data generation or column uniquity.");
 			}

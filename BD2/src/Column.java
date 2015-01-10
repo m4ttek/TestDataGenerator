@@ -42,8 +42,12 @@ public class Column {
 		if (dataType == null) {
 			throw new RuntimeException("Error: data type for column with name " + columnName + " not set.");
 		}
-		List<String> data = dataType.getData(numberOfTuples);
+		List<String> data = dataType.getData(getNumberOfTuples());
 		generatedData = data;
 		return data;
+	}
+
+	public int getNumberOfTuples() {
+		return numberOfTuples;
 	}
 }

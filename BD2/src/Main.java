@@ -40,7 +40,7 @@ public class Main {
 			LADUNKI_TABLE, MANDATY_TABLE, MATERIALY_EKSPLOATACYJNE_TABLE,
 			POJAZDY_TABLE, PRZEGLADY_TECHNICZNE_TABLE, PRZEJAZDY_TABLE,
 			PRZYCZEPY_TABLE, RODZAJE_LADUNKOW_SLOWNIK_TABLE,
-			RODZAJE_SERWISOW_SLOWNIK_TABLE, RODZAJE_WYKROCZEN_SLOWNIK_TABLE,
+			RODZAJE_SERWISOW_SLOWNIK_TABLE, RODZAJE_WYKROCZEN_SLOWNIK_TABLE, SERWISY_TABLE,
 			UPRAWNIENIA_TABLE, TYPY_MATERIALOW_SLOWNIK_TABLE, STATUSY_PRZEJAZDOW_SLOWNIK_TABLE);
 
 	public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -114,7 +114,8 @@ public class Main {
 		 */
 		table = new DefaultTable(RODZAJE_SERWISOW_SLOWNIK_TABLE, 14);
 		columnList = new ArrayList<>();
-		columnList.add(new Column("id", new DataTypeNumber(0, 14, 7, 0, true, false, true), 14));
+		Column rodzajeSerwisow = new Column("id", new DataTypeNumber(0, 14, 7, 0, true, false, true), 14);
+		columnList.add(rodzajeSerwisow);
 		columnList.add(new Column("opis", new DataTypeLoadedFromFile("rodzaje_serwisow.txt", true, false), 14));
 		table.setColumns(columnList);
 		tableList.add(table);
@@ -133,18 +134,18 @@ public class Main {
 	    CONSTRAINT zmiennik CHECK ((id<>Kierowca_id)),
 	    CONSTRAINT Kierowca_PK PRIMARY KEY (id)
 		*/
-		table = new DefaultTable(KIEROWCY_TABLE, 20);
+		table = new DefaultTable(KIEROWCY_TABLE, 80);
 		columnList = new ArrayList<>();
-		Column id = new Column("id", new DataTypeNumber(0, 20, 10, 0, true, false, true), 20);
-		columnList.add(id);
-		columnList.add(new Column("imie", new DataTypeLoadedFromFile("imiona.txt", false, false), 20));
-		columnList.add(new Column("nazwisko", new DataTypeLoadedFromFile("nazwiska.txt", false, false), 20));
-		Column wiek = new Column("wiek", new DataTypeNumber(20, 55, 35, 0, false, false, false), 20);
+		Column kierowcy = new Column("id", new DataTypeNumber(0, 80, 10, 0, true, false, true), 80);
+		columnList.add(kierowcy);
+		columnList.add(new Column("imie", new DataTypeLoadedFromFile("imiona.txt", false, false), 80));
+		columnList.add(new Column("nazwisko", new DataTypeLoadedFromFile("nazwiska.txt", false, false), 80));
+		Column wiek = new Column("wiek", new DataTypeNumber(20, 55, 35, 0, false, false, false), 80);
 		columnList.add(wiek);
-		columnList.add(new Column("pesel", new DataTypePESELFromAgeOrDate(wiek, true), 20));
-		columnList.add(new Column("telefon", new DataTypeNumber(500000000, 800000000, 600500000, 0, true, false, false), 20));
-		columnList.add(new Column("Kierowca_id", new DataTypeFK(id, false, true, true), 20));
-		columnList.add(new Column("Uprawnienie_id", new DataTypeFK(uprawnienieId, false, false, false), 20));
+		columnList.add(new Column("pesel", new DataTypePESELFromAgeOrDate(wiek, true), 80));
+		columnList.add(new Column("telefon", new DataTypeNumber(500000000, 800000000, 600500000, 0, true, false, false), 80));
+		columnList.add(new Column("Kierowca_id", new DataTypeFK(kierowcy, false, true, true), 80));
+		columnList.add(new Column("Uprawnienie_id", new DataTypeFK(uprawnienieId, false, false, false), 80));
 		table.setColumns(columnList);
 		tableList.add(table);
 
@@ -162,21 +163,59 @@ public class Main {
 		    CONSTRAINT vin_unique UNIQUE (vin),
 		    CONSTRAINT Pojazd_PK PRIMARY KEY (Rejestracja)
 		 */
-		table = new DefaultTable(POJAZDY_TABLE, 50);
+		table = new DefaultTable(POJAZDY_TABLE, 2100);
+
+		//pojazdy osobowe
 		columnList = new ArrayList<>();
-		Column rejestracja = new Column("Rejestracja", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 7, 7,true, false), 50);
-		columnList.add(rejestracja);
-		columnList.add(new Column("vin", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 14, 14,true, false), 50));
-		columnList.add(new Column("masa_wlasna", new DataTypeNumber(10, 55, 35, 0, false, false, false), 50));
-		columnList.add(new Column("model", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 50));
-		columnList.add(new Column("marka", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 50));
-		columnList.add(new Column("rok_produkcji", new DataTypeNumber(1970, 2014, 1999, 0, false, false, false), 50));
-		columnList.add(new Column("uciag", new DataTypeNumber(10000, 50000, 20000, 0, false, true, false), 50));
-		columnList.add(new Column("masa_ladunku", new DataTypeNumber(10000, 200000, 80000, 0, false, true, false), 50));
-		columnList.add(new Column("rodzaj_ladunku", new DataTypeFK(rodzajeLadunkow, false, false, false), 50));
-		columnList.add(new Column("liczba_pasazerow", new DataTypeNumber(5, 15, 10, 0, false, true, false), 50));
+		Column rejestracjaOsobowe = new Column("Rejestracja", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 7, 7,true, false), 100);
+		columnList.add(rejestracjaOsobowe);
+		columnList.add(new Column("vin", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 14, 14,true, false), 100));
+		columnList.add(new Column("masa_wlasna", new DataTypeNumber(500, 1000, 35, 0, false, false, false), 100));
+		columnList.add(new Column("model", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 100));
+		columnList.add(new Column("marka", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 100));
+		columnList.add(new Column("rok_produkcji", new DataTypeNumber(1970, 2004, 1999, 0, false, false, false), 100));
+		columnList.add(new Column("uciag", new DataTypeFillNull(), 100));
+		columnList.add(new Column("masa_ladunku", new DataTypeFillNull(), 100));
+		columnList.add(new Column("rodzaj_ladunku", new DataTypeFK(rodzajeLadunkow, false, false, false), 100));
+		columnList.add(new Column("liczba_pasazerow", new DataTypeNumber(5, 15, 10, 0, false, true, false), 100));
 		table.setColumns(columnList);
+
+		// samochody dostawcze
+		columnList = new ArrayList<>();
+		Column rejestracjaDostawcze = new Column("Rejestracja", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 7, 7,true, false), 1200);
+		columnList.add(rejestracjaDostawcze);
+		columnList.add(new Column("vin", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 14, 14,true, false), 1200));
+		columnList.add(new Column("masa_wlasna", new DataTypeNumber(1000, 2000, 35, 0, false, false, false), 1200));
+		columnList.add(new Column("model", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 1200));
+		columnList.add(new Column("marka", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 1200));
+		columnList.add(new Column("rok_produkcji", new DataTypeNumber(1970, 2004, 1999, 0, false, false, false), 1200));
+		columnList.add(new Column("uciag", new DataTypeNumber(10000, 50000, 20000, 0, false, true, false), 1200));
+		columnList.add(new Column("masa_ladunku", new DataTypeNumber(10000, 200000, 80000, 0, false, true, false), 1200));
+		columnList.add(new Column("rodzaj_ladunku", new DataTypeFK(rodzajeLadunkow, false, false, false), 1200));
+		columnList.add(new Column("liczba_pasazerow", new DataTypeFillNull(), 1200));
+		table.addAdditionalSection(columnList);
+
+		// pojazdy ciężarowe
+		columnList = new ArrayList<>();
+		Column rejestracjaCiężarowe = new Column("Rejestracja", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 7, 7,true, false), 800);
+		columnList.add(rejestracjaCiężarowe);
+		columnList.add(new Column("vin", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 14, 14,true, false), 800));
+		columnList.add(new Column("masa_wlasna", new DataTypeNumber(4000, 8000, 35, 0, false, false, false), 800));
+		columnList.add(new Column("model", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 800));
+		columnList.add(new Column("marka", new DataTypeLoadedFromFile("pojazdy.txt", false, false), 800));
+		columnList.add(new Column("rok_produkcji", new DataTypeNumber(1970, 2004, 1999, 0, false, false, false), 800));
+		columnList.add(new Column("uciag", new DataTypeNumber(10000, 50000, 20000, 0, false, true, false), 800));
+		columnList.add(new Column("masa_ladunku", new DataTypeNumber(20000, 500000, 80000, 0, false, true, false), 800));
+		columnList.add(new Column("rodzaj_ladunku", new DataTypeFK(rodzajeLadunkow, false, false, false), 800));
+		columnList.add(new Column("liczba_pasazerow", new DataTypeFillNull(), 800));
+		table.addAdditionalSection(columnList);
+
 		tableList.add(table);
+
+		List<Column> wszystkiePojazdyRejestracje = new ArrayList<Column>();
+		wszystkiePojazdyRejestracje.add(rejestracjaOsobowe);
+		wszystkiePojazdyRejestracje.add(rejestracjaDostawcze);
+		wszystkiePojazdyRejestracje.add(rejestracjaCiężarowe);
 
 		/* Przeglady_techniczne
     	numer integer  NOT NULL,
@@ -188,16 +227,17 @@ public class Main {
     	CONSTRAINT daty CHECK ((data<waznosc_przegladu)),
     	CONSTRAINT Przeglad_techniczny_PK PRIMARY KEY (numer)
 		 */
-		table = new DefaultTable(PRZEGLADY_TECHNICZNE_TABLE, 200);
+		table = new DefaultTable(PRZEGLADY_TECHNICZNE_TABLE, 2000);
 		columnList = new ArrayList<>();
-		columnList.add(new Column("numer", new DataTypeNumber(0, 200, 100, 0, true, false, true), 200));
-		Column MOTDate = new Column("data", new DataTypeDate(simpleDateFormat, new Timestamp(100, 6, 0, 0, 0, 0, 0), new Timestamp(115, 0, 0, 0, 0, 0, 0), null, 0, 0, false, false), 200);
+		columnList.add(new Column("numer", new DataTypeNumber(0, 2000, 100, 0, true, false, true), 2000));
+		Column MOTDate = new Column("data", new DataTypeDate(simpleDateFormat, new Timestamp(25l * 365 * 24 * 60 * 60 * 1000l), new Timestamp(34l * 365 * 24 * 60 * 60 * 1000l), null, null, 0, 0, false, false), 2000);
 		columnList.add(MOTDate);
-		columnList.add(new Column("koszt_przegladu", new DataTypeNumber(50, 5000, 1000, 2, false, false, false), 200));
+		columnList.add(new Column("koszt_przegladu", new DataTypeNumber(50, 5000, 1000, 2, false, false, false), 2000));
 		columnList.add(new Column("waznosc_przegladu", new DataTypeDate(simpleDateFormat, null, null, MOTDate,
-				new Timestamp(1, 0, 0, 0, 0, 0, 0).getTime(), new Timestamp(1, 1, 0, 0, 0, 0, 0).getTime(), false, false), 200));
-		columnList.add(new Column("rezultat", new DataTypeLiteral(null, "PN", 1, 1, false, false), 200));
-		columnList.add(new Column("Pojazd_Rejestracja", new DataTypeFK(rejestracja, false, false, false), 200));
+				null, 365 * 24 * 60 * 60 * 1000l, 395 * 24 * 60 * 60 * 1000l, false, false), 2000));
+		columnList.add(new Column("rezultat", new DataTypeLiteral(null, "PN", 1, 1, false, false), 2000));
+		columnList.add(new Column("Pojazd_Rejestracja", new DataTypeFK(
+				wszystkiePojazdyRejestracje, false, false, false), 2000));
 		table.setColumns(columnList);
 		tableList.add(table);
 
@@ -208,11 +248,14 @@ public class Main {
 		    Pojazd_Rejestracja nvarchar2(15)  NULL,
 		    CONSTRAINT Przyczepa_PK PRIMARY KEY (rejestracja)
 		*/
-		table = new DefaultTable(PRZYCZEPY_TABLE, 50);
+		table = new DefaultTable(PRZYCZEPY_TABLE, 1000);
 		columnList = new ArrayList<>();
-		columnList.add(new Column("rejestracja", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 7, 7,true, false),50));
-		columnList.add(new Column("masa_ladunku", new DataTypeNumber(10000, 200000, 80000, 0, false, true, false), 50));
-		columnList.add(new Column("Pojazd_Re", ,50));
+		columnList.add(new Column("rejestracja", new DataTypeLiteral(null, "ABCDEFGHIJKLMNOPRSTUWXYZ1234567890", 7, 7,true, false),1000));
+		columnList.add(new Column("masa_ladunku", new DataTypeNumber(10000, 200000, 80000, 0, false, true, false), 1000));
+		columnList.add(new Column("rodzaj_ladunku", new DataTypeFK(rodzajeLadunkow, false, false, false), 1000));
+		columnList.add(new Column("Pojazd_Rejestracja", new DataTypeFK(rejestracjaCiężarowe, false, false, false), 1000));
+		table.setColumns(columnList);
+		tableList.add(table);
 
 		/* Przejazdy
 		    id integer  NOT NULL,
@@ -228,6 +271,23 @@ public class Main {
 		    Kierowca_id integer  NOT NULL,
 		    CONSTRAINT Przejazd_PK PRIMARY KEY (id)
 		*/
+		table = new DefaultTable(PRZEJAZDY_TABLE, 10000);
+		columnList = new ArrayList<>();
+		Column przejazd = new Column("id", new DataTypeNumber(0, 10000, 50, 0, true, false, true), 10000);
+		columnList.add(przejazd);
+		columnList.add(new Column("miejsce_poczatkowe", new DataTypeLoadedFromFile("miasta.txt", false, false), 10000));
+		columnList.add(new Column("miejsce_docelowe", new DataTypeLoadedFromFile("miasta.txt", false, false), 10000));
+		columnList.add(new Column("odleglosc", new DataTypeNumber(1, 500, 250, 0, false, false, false), 10000));
+		columnList.add(new Column("ilosc_paliwa", new DataTypeNumber(1, 500, 250, 0, false, false, false), 10000));
+		columnList.add(new Column("Pojazd_Rejestracja", new DataTypeFK(wszystkiePojazdyRejestracje, false, false, false), 10000));
+		Column dataPrzejazdu = new Column("data", new DataTypeDate(simpleDateFormat, new Timestamp(24l * 365 * 24 * 60 * 60 * 1000l), new Timestamp(34l * 365 * 24 * 60 * 60 * 1000l),  null, null, 0, 0, false, false), 10000);
+		columnList.add(dataPrzejazdu);
+		columnList.add(new Column("wynagrodzenie", new DataTypeNumber(300, 5000, 1000, 0, false, false, false), 10000));
+		columnList.add(new Column("priorytet", new DataTypeNumber(1, 5, 3, 0, false, false, false), 10000));
+		columnList.add(new Column("status", new DataTypeFK(statusyPrzejazdow, false, false, false), 10000));
+		columnList.add(new Column("Kierowca_id", new DataTypeFK(kierowcy, false, false, false), 10000));
+		table.setColumns(columnList);
+		tableList.add(table);
 
 		/* Ladunki
 		    id integer  NOT NULL,
@@ -237,6 +297,15 @@ public class Main {
 		    rodzaj_ladunku integer  NOT NULL,
 		    CONSTRAINT Ladunek_PK PRIMARY KEY (id)
 		*/
+		table = new DefaultTable(LADUNKI_TABLE, 1000);
+		columnList = new ArrayList<>();
+		columnList.add(new Column("id", new DataTypeNumber(0, 1000, 50, 0, true, false, true), 1000));
+		columnList.add(new Column("masa", new DataTypeNumber(100, 20000, 10000, 0, false, false, false), 1000));
+		columnList.add(new Column("Przejazd_id", new DataTypeFK(przejazd, false, false, false), 1000));
+		columnList.add(new Column("opis", new DataTypeLiteral(null, "QWE RTYUIOOPAS DFGHJKLZXCVBNMqwe rtyuiopasdfgh jklzxcvbnm ", 30, 100, false, false), 1000));
+		columnList.add(new Column("rodzaj_ladunku", new DataTypeFK(rodzajeLadunkow, false, false, false), 1000));
+		table.setColumns(columnList);
+		tableList.add(table);
 
 		/* Mandaty
 		    id integer  NOT NULL,
@@ -248,6 +317,17 @@ public class Main {
 		    CONSTRAINT punkty_karne_nieujemne CHECK ((punkty_karne>=0) AND (punkty_karne<100)),
 		    CONSTRAINT Mandat_PK PRIMARY KEY (id)
 		*/
+		table = new DefaultTable(MANDATY_TABLE, 2000);
+		columnList = new ArrayList<>();
+		columnList.add(new Column("id", new DataTypeNumber(0, 2000, 100, 0, true, false, true), 2000));
+		Column mandatyPrzejazdFK = new Column("Przejazd_id", new DataTypeFK(przejazd, false, false, false), 2000);
+		columnList.add(mandatyPrzejazdFK);
+		columnList.add(new Column("data_wystawienia", new DataTypeDate(simpleDateFormat, null, null, dataPrzejazdu, mandatyPrzejazdFK, 4 * 60 * 60 * 1000l, 2 * 24 * 60 * 60 * 1000l, false, false), 2000));
+		columnList.add(new Column("punkty_karne", new DataTypeNumber(1, 24, 6, 0, false, false, false), 2000));
+		columnList.add(new Column("kwota", new DataTypeNumber(0, 1000, 500, 0, false, false, false), 2000));
+		columnList.add(new Column("rodzaj_wykroczenia", new DataTypeFK(rodzajeWykroczen, false, false, false), 2000));
+		table.setColumns(columnList);
+		tableList.add(table);
 
 		/* Serwisy
 		    id integer  NOT NULL,
@@ -260,6 +340,65 @@ public class Main {
 		    CONSTRAINT FKArc_3 CHECK (( ( ( Pojazd_Rejestracja1 IS NOT NULL ) AND ( Przejazd_id IS NULL ) ) OR ( ( Przejazd_id IS NOT NULL ) AND ( Pojazd_Rejestracja1 IS NULL ) ) )),
 		    CONSTRAINT Serwis_PK PRIMARY KEY (id)
 		*/
+		table = new DefaultTable(SERWISY_TABLE, 30000);
+
+		// serwisy wykonywane dla przejazdów
+		columnList = new ArrayList<>();
+		Column serwisPodczasPrzejazdu = new Column("id", new DataTypeNumber(0, 10000, 100, 0, true, false, true), 10000);
+		columnList.add(serwisPodczasPrzejazdu);
+		Column serwisyPrzejazdFK = new Column("Przejazd_id", new DataTypeFK(przejazd, false, false, false), 10000);
+		columnList.add(serwisyPrzejazdFK);
+		Column dataSerwisuPrzejazdu = new Column("data_wykonania", new DataTypeDate(simpleDateFormat, null, null, dataPrzejazdu, serwisyPrzejazdFK, 24 * 60 * 60 * 1000l, 30 * 24 * 60 * 60 * 1000l, false, false), 10000);
+		columnList.add(dataSerwisuPrzejazdu);
+		columnList.add(new Column("miejsce_serwisowania", new DataTypeLoadedFromFile("miasta.txt", false, false), 10000));
+		columnList.add(new Column("koszt_serwisu", new DataTypeNumber(100, 4000, 2000, 0, false, false, false), 10000));
+		columnList.add(new Column("rodzaj_serwisu", new DataTypeFK(rodzajeSerwisow, false, false, false), 10000));
+		columnList.add(new Column("Pojazd_Rejestracja1", new DataTypeFillNull(), 10000));
+		table.setColumns(columnList);
+
+		// serwisy wykonywane dla pojazdu
+		columnList = new ArrayList<Column>();
+		Column serwisDlaPojazdu = new Column("id", new DataTypeNumber(10000, 20000, 100, 0, true, false, true), 10000);
+		columnList.add(serwisDlaPojazdu);
+		Column serwisyPrzejazdNullFK = new Column("Przejazd_id", new DataTypeFillNull(), 10000);
+		columnList.add(serwisyPrzejazdNullFK);
+		Column dataSerwisuPojazdu = new Column("data_wykonania", new DataTypeDate(simpleDateFormat, null, null, dataPrzejazdu, null, 24 * 60 * 60 * 1000l, 30 * 24 * 60 * 60 * 1000l, false, false), 10000);
+		columnList.add(dataSerwisuPojazdu);
+		columnList.add(new Column("miejsce_serwisowania", new DataTypeLoadedFromFile("miasta.txt", false, false), 10000));
+		columnList.add(new Column("koszt_serwisu", new DataTypeNumber(100, 4000, 2000, 0, false, false, false), 10000));
+		columnList.add(new Column("rodzaj_serwisu", new DataTypeFK(rodzajeSerwisow, false, false, false), 10000));
+		columnList.add(new Column("Pojazd_Rejestracja1", new DataTypeFK(wszystkiePojazdyRejestracje, false, false, false), 10000));
+		table.addAdditionalSection(columnList);
+		tableList.add(table);
+
+		List<Column> wszystkieSerwisy = new ArrayList<Column>();
+		wszystkieSerwisy.add(serwisPodczasPrzejazdu);
+		wszystkieSerwisy.add(serwisDlaPojazdu);
+
+		List<Column> wszystkieDatySerwisow = new ArrayList<Column>();
+		wszystkieDatySerwisow.add(dataSerwisuPrzejazdu);
+		wszystkieDatySerwisow.add(dataSerwisuPojazdu);
+
+		/* Materialy_eksploatacyjne
+		    id integer  NOT NULL,
+		    koszt integer  NOT NULL,
+		    data_zakupu date  NOT NULL,
+		    ilosc integer  NOT NULL,
+		    Serwis_id integer  NOT NULL,
+		    typ integer  NOT NULL,
+		    CONSTRAINT Material_eksploatacyjny_PK PRIMARY KEY (id)
+		*/
+		table = new DefaultTable(MATERIALY_EKSPLOATACYJNE_TABLE, 20000);
+		columnList = new ArrayList<>();
+		columnList.add(new Column("id", new DataTypeNumber(0, 20000, 100, 0, true, false, true), 20000));
+		columnList.add(new Column("koszt", new DataTypeNumber(20, 10000, 1000, 0, false, false, false), 20000));
+		Column materialySerwisFK = new Column("Serwis_id", new DataTypeFK(wszystkieSerwisy, false, false, false), 20000);
+		columnList.add(materialySerwisFK);
+		columnList.add(new Column("data_zakupu", new DataTypeDate(simpleDateFormat, null, null, dataSerwisuPojazdu, materialySerwisFK, 24 * 60 * 60 * 1000l, 30 * 24 * 60 * 60 * 1000l, false, false), 20000));
+		columnList.add(new Column("ilosc", new DataTypeNumber(0, 2000, 1000, 0, false, false, false), 20000));
+		columnList.add(new Column("typ", new DataTypeFK(typyMaterialow, false, false, false), 20000));
+		table.setColumns(columnList);
+		tableList.add(table);
 
 		dataGeneratorManager.setTables(tableList);
 
